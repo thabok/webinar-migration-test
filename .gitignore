@@ -1,0 +1,20 @@
+# General
+*.html
+
+# Python
+**/__pycache__/
+*.pyc
+*.pyo
+**/*.egg-info/
+
+# Simulink
+**/slprj/
+**/*_rtw/
+*.slxc
+*.slx.autosave
+*.mex64
+
+# MacOS
+.DS_Store
+
+logs/current.log
