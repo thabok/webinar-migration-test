@@ -15,7 +15,7 @@ def migration_source(ep, model_path, script_path, matlab_version):
     model_path = os.path.abspath(model_path)
     script_path = os.path.abspath(script_path) if script_path else None
     result_dir = os.path.abspath('results')
-    epp_file = get_epp_file_by_name(result_dir, model_path)
+    epp_file, _ = get_epp_file_by_name(result_dir, model_path)
     
     # Empty BTC EmbeddedPlatform profile (*.epp) + Arch Import
     ep.post('profiles?discardCurrentProfile=true')
@@ -71,7 +71,7 @@ def migration_target(ep, model_path, script_path, matlab_version):
     model_path = os.path.abspath(model_path)
     script_path = os.path.abspath(script_path) if script_path else None
     result_dir = os.path.abspath('results')
-    epp_file = get_epp_file_by_name(result_dir, model_path)
+    epp_file, epp_rel_path = get_epp_file_by_name(result_dir, model_path)
 
     # load BTC EmbeddedPlatform profile (*.epp) -> Update Model
     ep.get(f'profiles/{epp_file}?discardCurrentProfile=true')
@@ -133,8 +133,8 @@ def migration_target(ep, model_path, script_path, matlab_version):
         'statementCoverage' : b2b_coverage['StatementPropertyCoverage']['handledPercentage'],
         'mcdcCoverage' : b2b_coverage['MCDCPropertyCoverage']['handledPercentage'],
         'testResult' : sil_test['verdictStatus'],
-        'eppPath' : epp_file,
-        'reportPath' : f"{result_dir}/{model_name}-migration-test.html"
+        'eppPath' : epp_rel_path,
+        'reportPath' : f"{model_name}-migration-test.html"
     }
     return result 
 
@@ -157,4 +157,4 @@ def start_ep_and_configure_matlab(version):
 
 def get_epp_file_by_name(result_dir, model_path):
     model_name = os.path.basename(model_path)[:-4].replace('Wrapper_', '')
-    return os.path.join(result_dir, model_name + '.epp')
+    return os.path.join(result_dir, model_name + '.epp'), model_name + '.epp'
