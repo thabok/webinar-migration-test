@@ -2,11 +2,11 @@ node {
 
     stage('preparations') {
         checkout scm
-        // bat 'pip install btc_embedded'
+        // bat 'pip install btc_embedded --upgrade'
     }
 
     stage('test') {
-        dir('multi') { bat 'python test_all_models.py' }
+        dir('multi') { bat 'python -u test_all_models.py' }
     }
 
     stage('wrap-up') {

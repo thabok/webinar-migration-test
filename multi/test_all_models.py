@@ -10,14 +10,14 @@ from mig2 import (migration_source, migration_target,
 #
 # Matlab 2020a
 #
-# shutil.rmtree('results')
-# ep = start_ep_and_configure_matlab('2020a')
+shutil.rmtree('results')
+ep = start_ep_and_configure_matlab('2020a')
 
-# models_2020a = [os.path.abspath(p) for p in glob.glob('2020a/*.slx')]
-# for old_model in models_2020a[:2]:
-#     migration_source(ep, old_model, os.path.abspath('2020a/init.m'), '2020a')
+models_2020a = [os.path.abspath(p) for p in glob.glob('2020a/*.slx')]
+for old_model in models_2020a[:2]:
+    migration_source(ep, old_model, os.path.abspath('2020a/init.m'), '2020a')
 
-# ep.close_application()
+ep.close_application()
 
 #
 # Matlab 2023b
