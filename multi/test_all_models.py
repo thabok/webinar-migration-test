@@ -10,7 +10,7 @@ from mig2 import (migration_source, migration_target,
 #
 # Matlab 2020a
 #
-shutil.rmtree('results')
+shutil.rmtree('results', ignore_errors=True)
 ep = start_ep_and_configure_matlab('2020a')
 
 models_2020a = [os.path.abspath(p) for p in glob.glob('2020a/*.slx')]
