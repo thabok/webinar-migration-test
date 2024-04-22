@@ -23,8 +23,7 @@ def migration_source(ep, model_path, script_path, matlab_version):
     # Import model
     payload = {
         'ecModelFile' : model_path,
-        'ecInitScript' : script_path,
-        'useExistingCode': True
+        'ecInitScript' : script_path
     } 
     ep.post('architectures/embedded-coder', payload, message="Model Import with Matlab 2020a")
     scopes = ep.get('scopes')
