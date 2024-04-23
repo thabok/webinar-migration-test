@@ -1,36 +1,28 @@
 import glob
 import os
-import shutil
-import time
 
-from btc_embedded import create_test_report_summary
-from mig2 import (migration_source, migration_target,
-                  start_ep_and_configure_matlab)
+from btc_embedded import migration_suite_source, migration_suite_target
 
-shutil.rmtree('results', ignore_errors=True)
+# Old Matlab: 2020a
+old_ml = '2020a'
 
-#
-# Matlab 2020a
-#
-ep = start_ep_and_configure_matlab('2020a')
+# List of models to test: 2020a/*.slx
+old_models = [{
+    'model' : os.path.abspath(slx),
+    'script' : os.path.abspath(f'{old_ml}/init.m')
+} for slx in glob.glob(f'{old_ml}/*.slx')]
 
-models_2020a = [os.path.abspath(p) for p in glob.glob('2020a/*.slx')]
-for old_model in models_2020a:
-    migration_source(ep, old_model, os.path.abspath('2020a/init.m'), '2020a')
+# Record reference behavior
+migration_suite_source(old_models, old_ml)
 
-ep.close_application()
+# New Matlab: 2023b
+new_ml = '2023b'
 
-#
-# Matlab 2023b
-#
-ep = start_ep_and_configure_matlab('2023b')
+# List of models to test: 2023b/*.slx
+new_models = [{
+    'model' : os.path.abspath(slx),
+    'script' : os.path.abspath(f'{new_ml}/init.m')
+} for slx in glob.glob(f'{new_ml}/*.slx')]
 
-results = []
-models_2023b = [os.path.abspath(p) for p in glob.glob('2023b/*.slx')]
-for new_model in models_2023b: 
-    result = migration_target(ep, new_model, os.path.abspath('2023b/init.m'), '2023b')
-    results.append(result)
-
-ep.close_application()
-
-create_test_report_summary(results, 'BTC Migration Test Suite', 'BTCMigrationTestSuite.html', 'results')
+# Perform migration test vs. reference behavior
+migration_suite_target(new_models, new_ml)
