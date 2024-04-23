@@ -1,5 +1,5 @@
 import glob
-import os
+from os.path import abspath
 
 from btc_embedded import migration_suite_source, migration_suite_target
 
@@ -8,8 +8,8 @@ old_ml = '2020a'
 
 # List of models to test: 2020a/*.slx
 old_models = [{
-    'model' : os.path.abspath(slx),
-    'script' : os.path.abspath(f'multi/{old_ml}/init.m')
+    'model' : slx,
+    'script' : f'multi/{old_ml}/init.m'
 } for slx in glob.glob(f'multi/{old_ml}/*.slx')]
 
 # Record reference behavior
@@ -20,8 +20,8 @@ new_ml = '2023b'
 
 # List of models to test: 2023b/*.slx
 new_models = [{
-    'model' : os.path.abspath(slx),
-    'script' : os.path.abspath(f'multi/{new_ml}/init.m')
+    'model' : slx,
+    'script' : f'multi/{new_ml}/init.m'
 } for slx in glob.glob(f'multi/{new_ml}/*.slx')]
 
 # Perform migration test vs. reference behavior
