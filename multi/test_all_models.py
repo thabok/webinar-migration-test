@@ -7,14 +7,15 @@ from btc_embedded import create_test_report_summary
 from mig2 import (migration_source, migration_target,
                   start_ep_and_configure_matlab)
 
+shutil.rmtree('results', ignore_errors=True)
+
 #
 # Matlab 2020a
 #
-shutil.rmtree('results', ignore_errors=True)
 ep = start_ep_and_configure_matlab('2020a')
 
 models_2020a = [os.path.abspath(p) for p in glob.glob('2020a/*.slx')]
-for old_model in models_2020a[:2]:
+for old_model in models_2020a:
     migration_source(ep, old_model, os.path.abspath('2020a/init.m'), '2020a')
 
 ep.close_application()
@@ -26,7 +27,7 @@ ep = start_ep_and_configure_matlab('2023b')
 
 results = []
 models_2023b = [os.path.abspath(p) for p in glob.glob('2023b/*.slx')]
-for new_model in models_2023b[:2]: 
+for new_model in models_2023b: 
     result = migration_target(ep, new_model, os.path.abspath('2023b/init.m'), '2023b')
     results.append(result)
 
