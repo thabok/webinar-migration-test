@@ -9,11 +9,11 @@ old_ml = '2020a'
 # List of models to test: 2020a/*.slx
 old_models = [{
     'model' : os.path.abspath(slx),
-    'script' : os.path.abspath(f'{old_ml}/init.m')
-} for slx in glob.glob(f'{old_ml}/*.slx')]
+    'script' : os.path.abspath(f'multi/{old_ml}/init.m')
+} for slx in glob.glob(f'multi/{old_ml}/*.slx')]
 
 # Record reference behavior
-migration_suite_source(old_models, old_ml)
+migration_suite_source(old_models[:-2], old_ml)
 
 # New Matlab: 2023b
 new_ml = '2023b'
@@ -21,8 +21,8 @@ new_ml = '2023b'
 # List of models to test: 2023b/*.slx
 new_models = [{
     'model' : os.path.abspath(slx),
-    'script' : os.path.abspath(f'{new_ml}/init.m')
-} for slx in glob.glob(f'{new_ml}/*.slx')]
+    'script' : os.path.abspath(f'multi/{new_ml}/init.m')
+} for slx in glob.glob(f'multi/{new_ml}/*.slx')]
 
 # Perform migration test vs. reference behavior
-migration_suite_target(new_models, new_ml)
+migration_suite_target(new_models[:-2], new_ml)

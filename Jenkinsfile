@@ -10,7 +10,6 @@ node {
     }
 
     stage('wrap-up') {
-        archiveArtifacts artifacts: 'multi/results/*.epp', followSymlinks: false
         publishHTML([allowMissing: false,
             alwaysLinkToLastBuild: false,
             includes: '*.html',
