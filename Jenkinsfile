@@ -10,12 +10,12 @@ node {
     }
 
     stage('wrap-up') {
-        archiveArtifacts artifacts: 'results/*.epp', followSymlinks: false
+        archiveArtifacts artifacts: 'multi/results/*.epp', followSymlinks: false
         publishHTML([allowMissing: false,
             alwaysLinkToLastBuild: false,
             includes: '*.html',
             keepAll: false,
-            reportDir: 'results',
+            reportDir: 'multi/results',
             reportFiles: 'BTCMigrationTestSuite.html',
             reportName: 'BTC Migration Test Suite',
             reportTitles: '',
