@@ -12,7 +12,7 @@ old_models = [{
 } for slx in glob.glob(f'multi/{old_ml}/*.slx')]
 
 # Record reference behavior
-migration_suite_source(old_models[:1], old_ml)
+migration_suite_source(old_models, old_ml)
 
 # New Matlab: 2023b
 new_ml = '2023b'
@@ -24,4 +24,4 @@ new_models = [{
 } for slx in glob.glob(f'multi/{new_ml}/*.slx')]
 
 # Perform migration test vs. reference behavior
-migration_suite_target(new_models[:1], new_ml)
+migration_suite_target(new_models, new_ml)

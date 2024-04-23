@@ -6,7 +6,7 @@ node {
     }
 
     stage('test') {
-        dir('multi') { bat 'python -u test_all_models.py' }
+        dir('multi') { bat 'python -u multi/test_all_models.py' }
     }
 
     stage('wrap-up') {
@@ -14,7 +14,7 @@ node {
             alwaysLinkToLastBuild: false,
             includes: '*.html',
             keepAll: false,
-            reportDir: 'multi/results',
+            reportDir: 'results',
             reportFiles: 'BTCMigrationTestSuite.html',
             reportName: 'BTC Migration Test Suite',
             reportTitles: '',
