@@ -6,7 +6,7 @@ node {
     }
 
     stage('test') {
-        dir('multi') { bat 'python -u multi/test_all_models.py' }
+        bat 'python -u multi/test_all_models.py'
     }
 
     stage('wrap-up') {
