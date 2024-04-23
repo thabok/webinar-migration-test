@@ -1,5 +1,4 @@
 import glob
-from os.path import abspath
 
 from btc_embedded import migration_suite_source, migration_suite_target
 
