@@ -2,7 +2,7 @@ node {
 
     stage('preparations') {
         checkout scm
-        // bat 'pip install btc_embedded --upgrade'
+        bat 'pip install btc_embedded --upgrade'
     }
 
     stage('test') {

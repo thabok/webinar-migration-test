@@ -14,4 +14,4 @@ new_model = {
 
 # btc migration test
 btc_project = migration_source(old_model, '2020a')
-btc_report = migration_target(new_model, '2023b', epp_file=btc_project)
+result = migration_target(new_model, '2023b', epp_file=btc_project)
